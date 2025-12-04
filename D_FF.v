@@ -1,14 +1,14 @@
 module dff(
     input d,
+    input clk,
     output reg q,
-    output reg qb,
-    input clk
+    output reg qb
     );
-    always@(posedge clk) begin
-    case ({d})
-        1'b0 :q=0;
-        1'b1: q=1;
-    endcase
-        qb=~q;
+
+    initial q = 1'b0;
+
+    always @(posedge clk) begin
+        q <= d;     // Store input
+        qb <= ~q;
     end
 endmodule
