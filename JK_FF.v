@@ -5,14 +5,16 @@ module jkff(
     output reg q,
     output reg qb
     );
-    initial q=1'b0;
-    always@(posedge clk) begin
-    case({j,k})
-        2'b00: q=q;
-        2'b01: q=1'b0;
-        2'b10:q=1'b1;
-        2'b11:q=~q;
-     endcase
-        qb=~q;
-      end
+
+    initial q = 1'b0;
+
+    always @(posedge clk) begin
+        case({j,k})
+            2'b00: q <= q;     // No change
+            2'b01: q <= 1'b0;  // Reset
+            2'b10: q <= 1'b1;  // Set
+            2'b11: q <= ~q;    // Toggle
+        endcase
+        qb <= ~q;
+    end
 endmodule
